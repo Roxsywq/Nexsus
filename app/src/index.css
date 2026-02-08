@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Nexus Dark Theme - Default */
+    --background: 222 47% 3%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 187 94% 43%;
+    --primary-foreground: 222 47% 3%;
+    --secondary: 262 83% 58%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 330 81% 60%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 187 94% 43%;
+    --radius: 0.75rem;
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 187 94% 43%;
+    --sidebar-primary-foreground: 222 47% 3%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 187 94% 43%;
+    
+    /* Custom Properties */
+    --nexus-cyan: #06b6d4;
+    --nexus-violet: #8b5cf6;
+    --nexus-pink: #ec4899;
+    --nexus-emerald: #10b981;
+    --nexus-amber: #f59e0b;
+    --nexus-red: #ef4444;
+    --nexus-blue: #3b82f6;
+    --nexus-background: #020617;
+    --nexus-surface: #0f172a;
+    --nexus-surface-light: #1e293b;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-nexus-background text-foreground font-sans antialiased;
+    background-color: #020617;
+    min-height: 100vh;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+  
+  /* Selection */
+  ::selection {
+    background: rgba(6, 182, 212, 0.3);
+    color: #f8fafc;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply bg-nexus-surface/80 backdrop-blur-xl border border-nexus-surface-light/50 rounded-xl;
+  }
+  
+  /* Glowing Border Effect */
+  .glow-border {
+    @apply relative;
+  }
+  
+  .glow-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.5), rgba(139, 92, 246, 0.5));
+    filter: blur(8px);
+    z-index: -1;
+  }
+  
+  .glow-border:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Neon Text */
+  .neon-text {
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3);
+  }
+  
+  /* Status Badges */
+  .badge-active {
+    @apply bg-nexus-emerald/20 text-nexus-emerald border border-nexus-emerald/30;
+  }
+  
+  .badge-warning {
+    @apply bg-nexus-amber/20 text-nexus-amber border border-nexus-amber/30;
+  }
+  
+  .badge-danger {
+    @apply bg-nexus-red/20 text-nexus-red border border-nexus-red/30;
+  }
+  
+  .badge-info {
+    @apply bg-nexus-blue/20 text-nexus-blue border border-nexus-blue/30;
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-nexus-cyan via-nexus-violet to-nexus-pink bg-clip-text text-transparent;
+  }
+  
+  /* Input Focus */
+  .input-glow:focus {
+    @apply ring-2 ring-nexus-cyan/50 border-nexus-cyan;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+  }
+  
+  /* Button Hover Lift */
+  .btn-lift {
+    @apply transition-all duration-200;
+  }
+  
+  .btn-lift:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 10px 40px -10px rgba(6, 182, 212, 0.3);
+  }
+  
+  /* Table Row Hover */
+  .table-row-hover {
+    @apply transition-all duration-150;
+  }
+  
+  .table-row-hover:hover {
+    @apply bg-nexus-surface-light/50;
+    transform: scale(1.002);
+  }
+  
+  /* Sidebar Item */
+  .sidebar-item {
+    @apply relative flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 transition-all duration-200;
+  }
+  
+  .sidebar-item:hover {
+    @apply bg-nexus-surface-light text-slate-100;
+  }
+  
+  .sidebar-item.active {
+    @apply bg-nexus-surface-light text-nexus-cyan;
+  }
+  
+  .sidebar-item.active::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-nexus-cyan rounded-r-full;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+  }
+  
+  /* Chart Container */
+  .chart-container {
+    @apply bg-nexus-surface rounded-xl border border-nexus-surface-light/50 p-6;
+  }
+  
+  /* Loading Skeleton */
+  .skeleton {
+    @apply bg-gradient-to-r from-nexus-surface via-nexus-surface-light to-nexus-surface;
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+  
+  /* Modal Overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-50;
+  }
+  
+  /* Toast */
+  .toast-success {
+    @apply bg-nexus-emerald/10 border border-nexus-emerald/30 text-nexus-emerald;
+  }
+  
+  .toast-error {
+    @apply bg-nexus-red/10 border border-nexus-red/30 text-nexus-red;
+  }
+  
+  .toast-warning {
+    @apply bg-nexus-amber/10 border border-nexus-amber/30 text-nexus-amber;
+  }
+  
+  .toast-info {
+    @apply bg-nexus-blue/10 border border-nexus-blue/30 text-nexus-blue;
+  }
+}
+
+@layer utilities {
+  /* Animation Delays */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+  
+  /* Backdrop Blur */
+  .backdrop-blur-xl {
+    backdrop-filter: blur(24px);
+  }
+  
+  /* Text Balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Recharts Custom Styles */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #1e293b;
+}
+
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+.recharts-default-tooltip {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.recharts-tooltip-label {
+  color: #f8fafc !important;
+}
+
+.recharts-tooltip-item {
+  color: #94a3b8 !important;
+}
